@@ -1,35 +1,63 @@
 #include <stdio.h>
 #include <stdlib.h>
-//Funcion para cargar la matriz
-void RecorrerMatriz(int filas, int columnas, int matriz[filas][columnas]) {
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            printf("Ingrese el numero de la fila %d columna %d de la matriz: ", i + 1, j + 1);
+#define RED     "\x1b[31m" //para errores
+#define GREEN   "\x1b[32m" //para datos devueltos por la app
+#define YELLOW  "\x1b[33m" //para datos ingresados por el usuario
+#define BLUE    "\x1b[34m" //para pedidos de la app
+#define RESET   "\x1b[0m"  //volver al defecto
+
+// Funcion para cargar la matriz
+void RecorrerMatriz(int filas, int columnas, int matriz[filas][columnas])
+{
+    for (int i = 0; i < filas; i++)
+    {
+        for (int j = 0; j < columnas; j++)
+        {
+            printf(BLUE"Ingrese el numero de la fila %d columna %d de la matriz: "RESET, i + 1, j + 1);
+            printf(YELLOW);
             scanf("%d", &matriz[i][j]);
+            printf(RESET);
         }
     }
 }
 // Función para mostrar la matriz
-void MostrarMatriz(int filas, int columnas, int matriz[filas][columnas]) {
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            printf("%d ", matriz[i][j]);
+void MostrarMatriz(int filas, int columnas, int matriz[filas][columnas])
+{
+    for (int i = 0; i < filas; i++)
+    {
+        for (int j = 0; j < columnas; j++)
+        {
+            printf(GREEN"%d " RESET, matriz[i][j]);
         }
         printf("\n");
     }
 }
- //Funcion para sumar la matriz
-void sumaMatriz(int filas,int columnas,int matriz_1[filas][columnas], int matriz_2[filas][columnas],int matriz_final[filas][columnas]){
+// Funcion para sumar la matriz
+void sumaMatriz(int filas, int columnas, int matriz_1[filas][columnas], int matriz_2[filas][columnas], int matriz_final[filas][columnas])
+{
 
-for (int i = 0; i < filas; i++)
-{for (int it = 0; it < columnas; it++)
-    {matriz_final[i][it] = matriz_1[i][it] + matriz_2[i][it];}}};
-//Funcion para restar la matriz
-void restarMatriz(int filas,int columnas,int matriz_1[filas][columnas], int matriz_2[filas][columnas],int matriz_final[filas][columnas]){
-for (int i = 0; i < filas; i++){for (int it = 0; it < columnas; it++){matriz_final[i][it] = matriz_1[i][it] - matriz_2[i][it];}}};
-//Funcion para multiplicar las matrices.
-void multiplicarMatrices(int filas,int columnas,int matriz_1[filas][columnas], int matriz_2[filas][columnas],int matriz_final[filas][columnas])
-{// Inicialización de la matriz final en 0
+    for (int i = 0; i < filas; i++)
+    {
+        for (int it = 0; it < columnas; it++)
+        {
+            matriz_final[i][it] = matriz_1[i][it] + matriz_2[i][it];
+        }
+    }
+};
+// Funcion para restar la matriz
+void restarMatriz(int filas, int columnas, int matriz_1[filas][columnas], int matriz_2[filas][columnas], int matriz_final[filas][columnas])
+{
+    for (int i = 0; i < filas; i++)
+    {
+        for (int it = 0; it < columnas; it++)
+        {
+            matriz_final[i][it] = matriz_1[i][it] - matriz_2[i][it];
+        }
+    }
+};
+// Funcion para multiplicar las matrices.
+void multiplicarMatrices(int filas, int columnas, int matriz_1[filas][columnas], int matriz_2[filas][columnas], int matriz_final[filas][columnas])
+{ // Inicialización de la matriz final en 0
 /*    for (int i = 0; i < filas_1; i++) {
         for (int j = 0; j < columnas_2; j++) {
             matriz_final[i][j] = 0;
@@ -41,84 +69,141 @@ void multiplicarMatrices(int filas,int columnas,int matriz_1[filas][columnas], i
         for (int j = 0; j < columnas_2; j++) {
             for (int k = 0; k < columnas_1; k++) {
                 matriz_final[i][j] += matriz_1[i][k] * matriz_2[k][j];}}}*/}
-//Funcion para sacar la transpuesta.
-void transpuestaMatriz(int filas,int columnas, int matriz[filas][columnas],int matriz_final[columnas][filas]){
+// Funcion para sacar la transpuesta.
+void transpuestaMatriz(int filas, int columnas, int matriz[filas][columnas], int matriz_final[columnas][filas])
+{
     for (int i = 0; i < filas; i++)
     {
         for (int it = 0; it < columnas; it++)
         {
-         matriz_final[it][i] = matriz[i][it];   
+            matriz_final[it][i] = matriz[i][it];
         }
-    }  
+    }
 }
 
-int main() {
-    int filas,columnas,opcion,bien_ingresado;
+int main()
+{
+    int filas, columnas, opcion, bien_ingresado;
 
-    printf("Bienvenido, soy una calculadora de matrices.");
+    printf(BLUE"Bienvenido, soy una calculadora de matrices.\n"RESET);
     //-------------------------------------------------  MENU  --------------------------------------------------------------------//
-    do{ printf("Opciones: \n 1_Suma de dos matrices \n 2_Resta de dos matrices. \n 3_Mostrar matriz transpuesta.\n 4_Multiplicacion de matricez.\n Digite su eleccion: ");
-        scanf("%d",&opcion);
-        if(opcion < 1 || opcion > 3){printf("Error, ingrese una opcion valida.");}
-    } while(opcion < 1 || opcion > 3);
+    do
+    {
+        printf(BLUE"Opciones: \n 1_Suma de dos matrices \n 2_Resta de dos matrices. \n 3_Mostrar matriz transpuesta.\n 4_Multiplicacion de matricez.\n Digite su eleccion: "RESET);
+        printf(YELLOW);
+        scanf("%d", &opcion);
+        printf(RESET);
+        if (opcion < 1 || opcion > 3)
+        {
+            printf(RED"Error, ingrese una opcion valida.\n"RESET);
+        }
+    } while (opcion < 1 || opcion > 3);
     //-------------------------------------------------  Salida de Opciones  --------------------------------------------------------------------//
-    
+
     // Pedir dimensiones de la matriz
-    printf("Ingrese la cantidad de filas de la matriz: ");
-    scanf("%d", &filas);
+    printf(BLUE"Ingrese la cantidad de filas de la matriz: "RESET);
+    do
+    {
+        printf(YELLOW);
+        scanf("%d", &filas);
+        printf(RESET);
+        if (filas <= 1)
+        {
+            printf(RED"Error, ingrese una cantidad de filas valida.");
+            printf("Ingrese un numero positivo mayor a 1\n"RESET);
+        }
 
-    printf("Ingrese la cantidad de columnas de la matriz: ");
-    scanf("%d", &columnas);
-    
-    int matriz_1[filas][columnas],matriz_2[filas][columnas],matriz_final[filas][columnas];
-    
-    do{
-     printf("Primer matriz.\n");
-     RecorrerMatriz(filas,columnas,matriz_1);
-     MostrarMatriz(filas,columnas,matriz_1);
-     printf("Matriz ingresada : \n");
-     printf("Ingresado correctamente 1_Si 2_No: ");
-     scanf("%d",&bien_ingresado);
-     if (bien_ingresado == 2)
-     {printf("Reiniciamos la matriz,ya puede ingresarla nuevamente.");}
+    } while (filas <= 1);
+
+    printf(BLUE"Ingrese la cantidad de columnas de la matriz: "RESET);
+    do
+    {
+        printf(YELLOW);
+        scanf("%d", &columnas);
+        printf(RESET);
+        if (columnas <= 1)
+        {
+            printf(RED"Error, ingrese una cantidad de columnas valida.");
+            printf("Ingrese un numero positivo mayor a 1\n"RESET);
+        }
+    } while (columnas <= 1);
+
+    int matriz_1[filas][columnas], matriz_2[filas][columnas], matriz_final[filas][columnas];
+
+    do
+    {
+        printf(GREEN"Primer matriz.\n"RESET);
+        RecorrerMatriz(filas, columnas, matriz_1);
+        printf(GREEN"Matriz ingresada:\n");
+        MostrarMatriz(filas, columnas, matriz_1);
+        printf(RESET);
+        printf(BLUE"Ingresado correctamente 1_Si 2_No: "RESET);
+        do
+        {   
+            printf(YELLOW);
+            scanf("%d", &bien_ingresado);
+            printf(RESET);
+            if (bien_ingresado !=1 && bien_ingresado !=2)
+            {
+                printf(RED"no ah ingresado ninguna de las opciones validas, Ingrese 1 o 2:\n"RESET);
+            }   
+        } while (bien_ingresado !=1 && bien_ingresado !=2);
+        if (bien_ingresado == 2)
+        {
+            printf(BLUE"Reiniciamos la matriz,ya puede ingresarla nuevamente.\n"RESET);
+        }    
     } while (bien_ingresado == 2);
 
-    do{
-     printf("Segunda matriz.\n");
-     RecorrerMatriz(filas,columnas,matriz_2);
-     MostrarMatriz(filas,columnas,matriz_2);
-     printf("Matriz ingresada : \n");
-     printf("Ingresado correctamente 1_Si 2_No: ");
-     scanf("%d",&bien_ingresado);
-     if (bien_ingresado == 2)
-     {printf("Reiniciamos la matriz,ya puede ingresarla nuevamente.");}
+    do
+    {
+        printf(GREEN"Segunda matriz.\n"RESET);
+        RecorrerMatriz(filas, columnas, matriz_2);
+        printf(GREEN"Matriz ingresada:\n");
+        MostrarMatriz(filas, columnas, matriz_2);
+        printf(RESET);
+        printf(BLUE"Ingresado correctamente 1_Si 2_No: "RESET);
+        do
+        {
+            printf(YELLOW);
+            scanf("%d", &bien_ingresado);
+            printf(RESET); 
+            if (bien_ingresado !=1 && bien_ingresado !=2)
+            {
+                printf(RED"no ah ingresado ninguna de las opciones validas, Ingrese 1 o 2:\n"RESET);
+            }   
+        } while (bien_ingresado !=1 && bien_ingresado !=2);
+        if (bien_ingresado == 2)
+        {
+            printf(BLUE"Reiniciamos la matriz,ya puede ingresarla nuevamente.\n"RESET);
+        }
     } while (bien_ingresado == 2);
-   
+
     switch (opcion)
     {
     case 1:
-        sumaMatriz(filas,columnas,matriz_1,matriz_2,matriz_final);
-        printf("Matriz resultante : \n");
-        MostrarMatriz(filas,columnas,matriz_final);
+        sumaMatriz(filas, columnas, matriz_1, matriz_2, matriz_final);
+        printf(GREEN"Matriz resultante : \n");
+        MostrarMatriz(filas, columnas, matriz_final);
+        printf(RESET);
         break;
     case 2:
-        restarMatriz(filas,columnas,matriz_1,matriz_2,matriz_final);
+        restarMatriz(filas, columnas, matriz_1, matriz_2, matriz_final);
         printf("Matriz resultante : \n");
-        MostrarMatriz(filas,columnas,matriz_final);
+        MostrarMatriz(filas, columnas, matriz_final);
         break;
     case 3:
-    transpuestaMatriz(filas,columnas,matriz_1,matriz_final);
-    MostrarMatriz(filas,columnas,matriz_final);
+        transpuestaMatriz(filas, columnas, matriz_1, matriz_final);
+        MostrarMatriz(filas, columnas, matriz_final);
         break;
     default:
-        multiplicarMatrices(filas,columnas,matriz_1,matriz_2,matriz_final);
+        multiplicarMatrices(filas, columnas, matriz_1, matriz_2, matriz_final);
         printf("Matriz resultante");
-        MostrarMatriz(filas,columnas,matriz_final);
+        MostrarMatriz(filas, columnas, matriz_final);
         break;
     }
 
-     //MostrarMatriz(filas,columnas,matriz_1);
-     //MostrarMatriz(filas,columnas,matriz_1);
+    // MostrarMatriz(filas,columnas,matriz_1);
+    // MostrarMatriz(filas,columnas,matriz_1);
 
     system("pause");
     return 0;
