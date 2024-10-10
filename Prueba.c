@@ -229,7 +229,7 @@ int main()
         MostrarMatriz(filas, columnas, matriz_final);
     case 4:
         transpuestaMatriz(filas, columnas, matriz_1, matriz_final);
-        printf("Matriz resultante");
+        printf("Matriz resultante\n");
         MostrarMatriz(filas, columnas, matriz_final);
         break;
     default:
