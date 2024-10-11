@@ -99,22 +99,18 @@ int binarioDecimal(int decimal){
 }
 
 int octalDecimal( int decimal){
-       int sumador = 0,asignado = decimal,numero = 0,numero2;
-    while (decimal != 0)
+       int sumador = 0,asignado = decimal,numero = 0;
+    while (decimal > 8)
     {
-       if (decimal % 10 == 1)
-        { numero2 = decimal % 8;
-        if (numero2 < 8)
-        {break;}
-            numero += pow((numero2*8),sumador);}
+        asignado = decimal % 10;
+         numero +=asignado * pow(8,sumador);
         sumador++;
         decimal = decimal / 10;
        
     }
-    numero += numero2;
+    numero += decimal;
     return printf("El numero octal %d en decimal es : %d \n",asignado,numero);
 }
-
 int hexaDecimal(int decimal){
     int sumador = 0,asignado = decimal,numero = 0;
     while (decimal != 1)

@@ -24,18 +24,16 @@ int binarioDecimal(int decimal){
     return printf("El numero binario %d en decimal es : %d \n",asignado,numero);
 }
 
-int octalDecimal( int decimal){
-       int sumador = 0,asignado = decimal,numero = 0;
-    while (decimal != 1)
-    {
-       if (decimal % 10 == 1)
-        { numero += pow(8,sumador);}
-        sumador++;
-        decimal = decimal / 10;
-       
-    }
-    numero += pow(2,sumador);
-    return printf("El numero octal %d en decimal es : %d \n",asignado,numero);
+int octalDecimal(int decimal){
+   int sumador = 0,numero,resp = 0;
+
+    while(decimal != 0){
+    {numero = decimal % 10;
+    resp += numero*pow(8,sumador);
+    sumador++;
+    decimal /= 10;}}
+   
+    return printf("El numero en decimal es : %d",resp);
 }
 
 int binario(int num){
@@ -164,31 +162,27 @@ int sumador = 0,asignado = binario,numero = 0;
 }
 
 int octalaBinario(int decimal){
-int sumador = 0,asignado = decimal,numero = 0;
-    while (decimal != 1)
-    {
-       if (decimal % 10 == 1)
-        { numero += pow(8,sumador);}
-        sumador++;
-        decimal = decimal / 10;
-       
-    }
-    numero += pow(2,sumador);
-    binario(numero);
+   int sumador = 0,numero,resp = 0;
+
+    while(decimal != 0){
+    {numero = decimal % 10;
+    resp += numero*pow(8,sumador);
+    sumador++;
+    decimal /= 10;}}
+   
+    binario(resp);
 }
 
 int octalaHexa(int decimal){
-int sumador = 0,asignado = decimal,numero = 0;
-    while (decimal != 1)
-    {
-       if (decimal % 10 == 1)
-        { numero += pow(8,sumador);}
-        sumador++;
-        decimal = decimal / 10;
-       
-    }
-    numero += pow(2,sumador);
-    hexadecimal(numero);
+int sumador = 0,numero,resp = 0;
+
+    while(decimal != 0){
+    {numero = decimal % 10;
+    resp += numero*pow(8,sumador);
+    sumador++;
+    decimal /= 10;}}
+   
+    hexadecimal(resp);
 }
 
 
