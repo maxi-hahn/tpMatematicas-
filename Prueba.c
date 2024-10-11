@@ -1,11 +1,199 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
 #define RED     "\x1b[31m" //para errores
 #define GREEN   "\x1b[32m" //para datos devueltos por la app
 #define YELLOW  "\x1b[33m" //para datos ingresados por el usuario
 #define BLUE    "\x1b[34m" //para pedidos de la app
 #define RESET   "\x1b[0m"  //volver al defecto
 
+//==================================================== FUNCIONES CAMBIO DE BASE ===========================================================//
+
+int binarioDecimal(int decimal){
+    int sumador = 0,asignado = decimal,numero = 0;
+    while (decimal != 1)
+    {
+       if (decimal % 10 == 1)
+        { numero += pow(2,sumador);}
+        sumador++;
+        decimal = decimal / 10;
+       
+    }
+    numero += pow(2,sumador);
+    return printf("El numero binario %d en decimal es : %d \n",asignado,numero);
+}
+
+int octalDecimal( int decimal){
+       int sumador = 0,asignado = decimal,numero = 0;
+    while (decimal != 1)
+    {
+       if (decimal % 10 == 1)
+        { numero += pow(8,sumador);}
+        sumador++;
+        decimal = decimal / 10;
+       
+    }
+    numero += pow(2,sumador);
+    return printf("El numero octal %d en decimal es : %d \n",asignado,numero);
+}
+
+int binario(int num){
+int sumador = 0,asignador = num;
+      while (asignador > 0)
+    {sumador++;
+     asignador = asignador / 2; } 
+    int size[sumador];
+
+    for (int it = sumador - 1; it >= 0; it--)
+    {   size[it]= num % 2;
+        num = num / 2; }
+
+    printf("El numero en binario es: ");
+    for (int iter = 0; iter < sumador; iter++) {
+        printf("%d", size[iter]);
+    }
+    printf("\n");
+
+}
+
+int octal(int num){
+int sumador = 0,asignador = num;
+      while (asignador > 0)
+    {sumador++;
+     asignador = asignador / 8; } 
+    int size[sumador];
+
+    for (int it = sumador - 1; it >= 0; it--)
+    {   size[it]= num % 8;
+        num = num / 8; }
+
+    printf("El numero en octal es: ");
+    for (int iter = 0; iter < sumador; iter++) {
+        printf("%d", size[iter]);
+    }
+    printf("\n");
+
+}
+
+int hexadecimal(int num){
+int sumador = 0,asignador = num;
+      while (asignador > 0)
+    {sumador++;
+     asignador = asignador / 16; } 
+    int size[sumador];
+
+    for (int it = sumador - 1; it >= 0; it--)
+    {   size[it]= num % 16;
+        num = num / 16; }
+
+    printf("El numero en hexadecimal es: ");
+    for (int iter = 0; iter < sumador; iter++) {
+        if ( 9 < size[iter] )
+        {
+            switch (size[iter])
+            {
+            case 10:
+                printf("A");
+                break;
+            case 11:
+                printf("B");
+            break;
+            case 12:
+                printf("C");
+            break;
+            case 13:
+                printf("D");
+            break;
+            case 14:
+                printf("E");
+            break;
+            case 15:
+                printf("F");
+            break;
+            default:
+                break;
+            }
+        }else{printf("%d", size[iter]);}
+        
+        
+    }
+    printf("\n");
+
+}
+
+int hexaDecimalaDecimal(int decimal){
+    int sumador = 0,asignado = decimal,numero = 0;
+    while (decimal != 1)
+    {
+       if (decimal % 10 == 1)
+        { numero += pow(16,sumador);}
+        sumador++;
+        decimal = decimal / 10;
+       
+    }
+    numero += pow(16,sumador);
+    return printf("El numero hexadecimal %d en decimal es : %d \n",asignado,numero);
+}
+
+int binarioaOctal(int binario){
+
+ int sumador = 0,asignado = binario,numero = 0;
+    while (binario != 1)
+    {
+       if (binario % 10 == 1)
+        { numero += pow(2,sumador);}
+        sumador++;
+        binario = binario / 10;  
+    }
+    numero += pow(2,sumador);
+    octal(numero);
+}
+
+int binarioaHexa(int binario){
+int sumador = 0,asignado = binario,numero = 0;
+    while (binario != 1)
+    {
+       if (binario % 10 == 1)
+        { numero += pow(2,sumador);}
+        sumador++;
+        binario = binario / 10;  
+    }
+    numero += pow(2,sumador);
+    hexadecimal(numero);
+}
+
+int octalaBinario(int decimal){
+int sumador = 0,asignado = decimal,numero = 0;
+    while (decimal != 1)
+    {
+       if (decimal % 10 == 1)
+        { numero += pow(8,sumador);}
+        sumador++;
+        decimal = decimal / 10;
+       
+    }
+    numero += pow(2,sumador);
+    binario(numero);
+}
+
+int octalaHexa(int decimal){
+int sumador = 0,asignado = decimal,numero = 0;
+    while (decimal != 1)
+    {
+       if (decimal % 10 == 1)
+        { numero += pow(8,sumador);}
+        sumador++;
+        decimal = decimal / 10;
+       
+    }
+    numero += pow(2,sumador);
+    hexadecimal(numero);
+}
+
+
+
+// ======================================================== FUNCIONES PARA MATRICES ========================================================//
 // Funcion para cargar la matriz
 void RecorrerMatriz(int filas, int columnas, int matriz[filas][columnas])
 {
@@ -72,25 +260,37 @@ void multiplicarMatrices(int filas, int columnas, int matriz_1[filas][columnas],
 // Funcion para sacar la transpuesta.
 void transpuestaMatriz(int filas, int columnas, int matriz[filas][columnas], int matriz_final[columnas][filas])
 {
-    for (int i = 0; i < filas; i++)
+    for (int i = 0; i < columnas; i++)
     {
-        for (int it = 0; it < columnas; it++)
+        for (int it = 0; it < filas; it++)
         {
             matriz_final[it][i] = matriz[i][it];
         }
     }
 }
+//======================================================= FIN FUNCIONES PARA MATRICES ==========================================================//
+
 
 int main()
 {
+    //GENERAL.
+    int tipo_calculadora;
+    //PARA MATRICES.
     int filas, columnas, opcion, bien_ingresado;
+    //PARA CAMBIO DE BASE.
+    int numero;
 
     printf(BLUE"Bienvenido, soy una calculadora de matrices y un conversor de bases.\n"RESET);
     //-------------------------------------------------  MENU  --------------------------------------------------------------------//
-
-    printf("Elija que funcionalidad quiere usar: 1_calculadora de matrices. 2_cambio de base.");
-
-    do
+    do{ printf("Elija que funcionalidad quiere usar:\n 1_calculadora de matrices.\n 2_cambio de base.\n Digite su eleccion: ");
+        scanf("%d",&tipo_calculadora);
+        if (tipo_calculadora < 1 || tipo_calculadora > 2)
+        {printf("Error, ingrese una opcion valida. ");}     
+    } while (tipo_calculadora < 1 || tipo_calculadora > 2);
+    
+    if (tipo_calculadora == 1)
+    {
+         do
     {   printf(BLUE"Opciones: \n 1_Suma de dos matrices \n 2_Resta de dos matrices. \n3_Multiplicacion de matricez.\n 4_Mostrar matriz transpuesta.\n 5_Mostrar matriz inversa. \n Digite su eleccion: "RESET);
         printf(YELLOW);
         scanf("%d", &opcion);
@@ -234,11 +434,48 @@ int main()
         break;
     default:
        
-        break;
-    }
+        break;}}else{
 
-    // MostrarMatriz(filas,columnas,matriz_1);
-    // MostrarMatriz(filas,columnas,matriz_1);
+            printf("Bienvenido al conversor de bases.");
+
+            printf("Que quieres convertir \n 1_Binario.\n 2_Octal\n 3_Decimal\n 4_Hexadecimal\n Digite su eleccion: ");
+            scanf("%d", &opcion);
+            printf("Ingrese el numero : ");
+            scanf("%d", &numero);
+            switch (opcion)
+            {
+            case 1:
+                binarioDecimal(numero);
+                binarioaOctal(numero);
+                binarioaHexa(numero);
+                break;
+            case 2:
+                octalDecimal(numero);
+                octalaBinario(numero);
+                octalaHexa(numero);
+            break;
+            case 3:
+                binario(numero);
+                octal(numero);
+                hexadecimal(numero);
+            break;
+            case 4:
+                hexaDecimalaDecimal(numero);
+            break;
+            default:
+                break;
+            }
+
+
+
+
+
+
+
+
+        }
+    
+    
 
     system("pause");
     return 0;
