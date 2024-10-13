@@ -111,19 +111,12 @@ int octalDecimal( int decimal){
     numero += decimal;
     return printf("El numero octal %d en decimal es : %d \n",asignado,numero);
 }
-int hexaDecimal(int decimal){
-    int sumador = 0,asignado = decimal,numero = 0;
-    while (decimal != 1)
-    {
-       if (decimal % 10 == 1)
-        { numero += pow(16,sumador);}
-        sumador++;
-        decimal = decimal / 10;
-       
-    }
-    numero += pow(16,sumador);
-    return printf("El numero hexadecimal %d en decimal es : %d \n",asignado,numero);}
+int hexaDecimal(char decimal[]){
+ int valor_decimal = (int)strtol(decimal, NULL, 16);  // Convertir de hexadecimal a decimal
 
+    // Imprimir el valor decimal
+    return printf("El numero en decimal es : %d\n", valor_decimal);
+}
 int binarioaOctal(int binario){
 
  int sumador = 0,asignado = binario,numero = 0;
@@ -167,14 +160,31 @@ int sumador = 0,asignado = decimal,numero = 0;
     numero += pow(2,sumador);
     binario(numero);
 }
+int hexabinario(int decimal[]){
 
+    int hexaDecimal(char decimal[]);{
+ int valor_decimal = (int)strtol(decimal, NULL, 16);  // Convertir de hexadecimal a decimal
+
+   binario(valor_decimal);
+}
+}
+int hexaOctal(int decimal[]){
+
+    int hexaDecimal(char decimal[]);{
+ int valor_decimal = (int)strtol(decimal, NULL, 16);  // Convertir de hexadecimal a decimal
+
+   octal(valor_decimal);
+}
+}
 
 int main() {
-   int octale = 15 ;
+    char hexa[25];
 
-    octalDecimal(octale);
+    scanf("%s", hexa);
+    hexaDecimal(hexa);
+    hexabinario(hexa);
+    hexaOctal(hexa);
 
     system("pause");
     return 0;
 }
-
